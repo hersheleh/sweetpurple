@@ -1,13 +1,15 @@
 'use client'
 
+import { useState } from 'react'
 import { AppBar, Toolbar, Typography } from "@mui/material";
-import Menu from './menu'
-import { purple } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { purple } from "@mui/material/colors";
 import { kalnia } from './fonts';
-
-import menu from './menu.json'
 import { ShoppingCartIconCounter } from "./add_to_cart";
+import Menu from './menu'
+import menu from './menu.json'
+import { MenuItemProps } from './MenuTypes';
+
 
 const theme = createTheme({
     palette: {
@@ -20,6 +22,9 @@ const theme = createTheme({
 
 
 export default function Home() {
+
+    const [cartItems, setCartItems] = useState();
+
     return (
         <ThemeProvider theme={theme}>
             <AppBar position="relative">

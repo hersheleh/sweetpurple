@@ -1,5 +1,5 @@
 export interface MenuItemProps {
-    name: number;
+    id: number;
     name: string;
     description: string;
     calories: number;

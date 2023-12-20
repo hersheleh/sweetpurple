@@ -5,7 +5,14 @@ import { AddToCartButton } from './add_to_cart';
 import { MenuItemProps } from './MenuTypes';
 
 
+/**
+ * A Component which displays a menu of items.
+ *
+ * @param menu - An Array of MenuItemProps
+ * @returns A JSX.Element
+ */
 export default function Menu({ menu }: { menu: Array<MenuItemProps> }) {
+
     const menuItems = menu.map(item =>
         <Grid item xs={3} key={item.name}>
             <MenuItem
