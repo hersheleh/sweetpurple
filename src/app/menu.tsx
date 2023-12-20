@@ -1,45 +1,37 @@
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
+import { AddToCartButton } from './add_to_cart';
+import { MenuItemProps } from './MenuTypes';
 
-interface MenuItemProps {
-    id: number;
-    name: string;
-    description: string;
-    calories: number;
-    price: number;
-}
 
 export default function Menu({ menu }: { menu: Array<MenuItemProps> }) {
-
-    const menu_items: void[] = menu.map((item) => {
-         menu_items.push(
-            <Grid item xs={3} key={item.id}>
-                <MenuItem
-                    id={item.id} name={item.name} description={item.description}
-                    calories={item.calories} price={item.price} />
-            </Grid>
-        );
-    });
+    const menuItems = menu.map(item =>
+        <Grid item xs={3} key={item.name}>
+            <MenuItem
+                id={item.id} name={item.name} description={item.description}
+                calories={item.calories} price={item.price} />
+        </Grid>
+    );
 
     return (
         <Grid container spacing={4}>
-          {menu_items as Array<MenuItemProps>}
+            {menuItems}
         </Grid>
     );
 }
 
 
-function MenuItem(
-    { name, description, calories, price }: MenuItemProps) {
+function MenuItem(menuItem: MenuItemProps) {
     return (
         <Card>
             <Typography variant="h5">
-                {name}
+                {menuItem.name}
             </Typography>
-            <Typography> {description} </Typography>
-            <Typography> calories {calories} </Typography>
-            <Typography> price ${price} </Typography>
+            <Typography> {menuItem.description} </Typography>
+            <Typography> calories {menuItem.calories} </Typography>
+            <Typography> price ${menuItem.price} </Typography>
+            <AddToCartButton menuItem={menuItem}/>
         </Card>
     );
 }
