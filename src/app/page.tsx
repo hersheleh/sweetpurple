@@ -23,8 +23,17 @@ const theme = createTheme({
 
 export default function Home() {
 
-    const [cart, setCart] = useState({});
-
+    const [cart, setCart] = useState(() => {
+        const cartKey = 'cart';
+        const cartJsonString = localStorage.getItem(cartKey);
+        if (cartJsonString != null) {
+            const localCart = JSON.parse(cartJsonString);
+            return localCart;
+        }
+        else {
+            return {};
+        }
+    });
 
     return (
         <ThemeProvider theme={theme}>

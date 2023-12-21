@@ -63,7 +63,6 @@ export function AddToCartButton({
     const addToCart = () => dispatch({ type: 'addtocart', value: menuItem.name });
 
     function updateCart() {
-        // debugger;
         const key: keyof Cart = menuItem.name as "string";
         let new_cart = { ...cart };
         if (new_cart[key] != undefined) {
@@ -73,32 +72,13 @@ export function AddToCartButton({
             new_cart[key] = 1;
         }
         onAdd(new_cart);
+        saveCartToLocalStorage(new_cart);
     }
 
 
-    function addItemToCart() {
-
+    function saveCartToLocalStorage(newCart: Cart) {
         const cartKey = 'cart';
-        const cartItems = localStorage.getItem(cartKey);
-        // let cart2: {number?: number} = {};
-        let cart: Record<string, number> = {};
-
-        // Check if 'cart' key in localStorage is set
-        // if it's not set, add the current menuItem to it with quantity 0
-        // if it is set increment the quantity of the current menuItem by 1
-        if (cartItems == null) {
-            cart[menuItem.name] = 1;
-        }
-        else {
-            cart = JSON.parse(cartItems);
-            if (cart[menuItem.name] == undefined) {
-                cart[menuItem.name] = 1;
-            }
-            else {
-                cart[menuItem.name]++;
-            }
-        }
-        localStorage.setItem(cartKey, JSON.stringify(cart));
+        localStorage.setItem(cartKey, JSON.stringify(newCart));
     }
 
     return (

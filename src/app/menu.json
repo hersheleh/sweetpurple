@@ -1,4 +1,4 @@
-[
+ [
   {
     "id": 0,
     "name": "purple sweet potato",
@@ -54,5 +54,12 @@
     "description": "not quite newtons",
     "calories": 37,
     "price": 1.30
+  },
+  {
+    "id": 8,
+    "name": "blueberries",
+    "description": "are they purple?",
+    "calories": 20,
+    "price": 2
   }
 ]
