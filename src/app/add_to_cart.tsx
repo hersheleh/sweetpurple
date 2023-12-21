@@ -7,6 +7,9 @@ import { MenuItemProps } from './MenuTypes'
 import { useReducer, useContext } from 'react';
 import { CartContext } from './CartContext';
 
+/**
+ * A
+ */
 interface Cart {
     string?: number
 };
@@ -63,7 +66,8 @@ export function AddToCartButton({
     const addToCart = () => dispatch({ type: 'addtocart', value: menuItem.name });
 
     function updateCart() {
-        const key: keyof Cart = menuItem.name as "string";
+        // const key: keyof Cart = menuItem.name as "string";
+        const key = menuItem.name as keyof Cart;
         let new_cart = { ...cart };
         if (new_cart[key] != undefined) {
             new_cart[key] += 1;
@@ -75,7 +79,6 @@ export function AddToCartButton({
         saveCartToLocalStorage(new_cart);
     }
 
-
     function saveCartToLocalStorage(newCart: Cart) {
         const cartKey = 'cart';
         localStorage.setItem(cartKey, JSON.stringify(newCart));
@@ -83,12 +86,12 @@ export function AddToCartButton({
 
     return (
         <Button variant="contained" onClick={updateCart}>
-            <AddShoppingCart />
+            <AddShoppingCart sx={{ mr: 2 }} /> Add to Cart
         </Button>
     );
 }
 
-export function ShoppingCartIconCounter({ cart }: { cart: { string?: number } }) {
+export function ShoppingCartIconCounter({ cart }: { cart: Cart }) {
 
     const numItemsInCart = calculateNumItemsInCart(cart);
 
@@ -119,30 +122,15 @@ export function ShoppingCartIconCounter({ cart }: { cart: { string?: number } })
     //     return totalNumItemsInCart;
     // });
 
-
-    // const [numItemsInCart] = useState(() => {
-    //     const cartJsonString = localStorage.getItem('cart');
-    //     if (cartJsonString != null) {
-    //         let totalNumItemsInCart: number | undefined = 0;
-    //         let cart: Record<string, number> = JSON.parse(cartJsonString);
-
-    //         for (let item in cart) {
-    //             let itemQuantity = cart[item];
-    //             if (itemQuantity != undefined) {
-    //                 totalNumItemsInCart = totalNumItemsInCart + itemQuantity;
-    //             }
-    //         }
-    //         return totalNumItemsInCart;
-    //     }
-    // }
-    // );
-
     return (
         <>
             <Typography>
                 {numItemsInCart}
             </Typography>
-            <ShoppingCart sx={{ mr: 2 }} />
+            <ShoppingCart sx={{ ml: 2, mr: 2 }} />
+            <Typography>
+                Shopping Cart
+            </Typography>
         </>
     )
 }

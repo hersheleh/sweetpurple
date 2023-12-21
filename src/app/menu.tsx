@@ -2,54 +2,101 @@
 import type { Dispatch, SetStateAction } from 'react';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
+import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { AddToCartButton } from './add_to_cart';
-import { MenuItemProps } from './MenuTypes';
+import { MenuItemProps, MenuProps, MenuSectionProps } from './MenuTypes';
+import allFoodItems from './food.json';
 
 
 /**
- * A Component which displays a menu of items.
+ * A Component which displays a `menu` of items.
  *
  * @param menu - An Array of MenuItemProps
  * @returns A JSX.Element
  */
 export default function Menu({ menu, cart, onAdd }: {
-    menu: Array<MenuItemProps>,
+    menu: MenuProps,
     cart: { string?: number },
     onAdd: Dispatch<SetStateAction<{}>>
 }) {
 
-    const menuItems = menu.map(item =>
-        <Grid item xs={3} key={item.name}>
+    const menuSections = menu.menu.map(section =>
+
+        <Box key={section.category}>
+            <MenuSection menu_section={section} cart={cart} onAdd={onAdd} />
+        </Box>
+    );
+
+    return (
+        <>
+            <Typography variant="h2">
+                Menu
+            </Typography>
+            <Typography variant="h5">
+                {menuSections}
+            </Typography>
+
+        </>
+    );
+}
+
+function MenuSection({ menu_section, cart, onAdd }: {
+    menu_section: MenuSectionProps,
+    cart: { string?: number },
+    onAdd: Dispatch<SetStateAction<{}>>
+}) {
+
+    const menuItems = menu_section.items.map(item =>
+
+        <Grid item xs={4} key={item.name}>
             <MenuItem
                 cart={cart}
                 onAdd={onAdd}
                 menuItem={item} />
         </Grid>
+
     );
 
     return (
-        <Grid container spacing={4}>
-            {menuItems}
-        </Grid>
+        <>
+            <Typography variant="h3">
+                {menu_section.category}
+            </Typography>
+
+            <Grid container spacing={6}>
+                {menuItems}
+            </Grid>
+        </>
     );
 }
-
 
 function MenuItem({ menuItem, cart, onAdd }: {
     menuItem: MenuItemProps,
     cart: { string?: number }
     onAdd: Dispatch<SetStateAction<{}>>
 }) {
+    // debugger;
+
+    const menuItemName = menuItem.name as keyof typeof allFoodItems;
+    let defaultMenuItem = allFoodItems[menuItemName];
+
+    let finalMenuItem = {...menuItem}; // make a copy of menuItem
+    finalMenuItem.description = defaultMenuItem.description;
+    finalMenuItem.calories = defaultMenuItem.calories;
+    if (menuItem.price) {
+        finalMenuItem.price = menuItem.price;
+    }
+
     return (
         <Card>
             <Typography variant="h5">
-                {menuItem.name}
+                {finalMenuItem.name}
             </Typography>
-            <Typography> {menuItem.description} </Typography>
-            <Typography> calories {menuItem.calories} </Typography>
-            <Typography> price ${menuItem.price} </Typography>
-            <AddToCartButton menuItem={menuItem} cart={cart} onAdd={onAdd} />
+            <Typography> {finalMenuItem.description} </Typography>
+            <Typography> calories {finalMenuItem.calories} </Typography>
+            <Typography> price {finalMenuItem.price} </Typography>
+            <AddToCartButton menuItem={finalMenuItem} cart={cart} onAdd={onAdd} />
         </Card>
     );
 }
