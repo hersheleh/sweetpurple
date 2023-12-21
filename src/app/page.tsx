@@ -23,7 +23,8 @@ const theme = createTheme({
 
 export default function Home() {
 
-    const [cartItems, setCartItems] = useState();
+    const [cart, setCart] = useState({});
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -37,11 +38,11 @@ export default function Home() {
                         sx={{ flex: 1 }}>
                         sweetpurple
                     </Typography>
-                    <ShoppingCartIconCounter />
+                    <ShoppingCartIconCounter cart={cart}/>
                 </Toolbar>
             </AppBar>
             <main>
-                <Menu menu={menu} />
+                <Menu menu={menu} cart={cart} onAdd={setCart} />
             </main>
         </ThemeProvider>
     );

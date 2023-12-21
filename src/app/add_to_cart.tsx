@@ -1,10 +1,11 @@
+import type { Dispatch, SetStateAction } from 'react'
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import AddShoppingCart from "@mui/icons-material/AddShoppingCart";
 import { MenuItemProps } from './MenuTypes'
-import { useState, useReducer } from 'react';
-
+import { useReducer, useContext } from 'react';
+import { CartContext } from './CartContext';
 
 interface Cart {
     string?: number
@@ -20,13 +21,13 @@ function stateReducer(
     // cart: Record<string, number>,
     cart: Cart,
     action: AddToCartAction): Cart {
-    debugger;
+
     switch (action.type) {
+        // Get the current cart. See if menuItem.name is in the cart.
+        // If it is, increment that key. If it's not initialize it to 1.
         case "addtocart":
-            /* Get the current cart. See if menuItem.name is in the cart.
-             * If it is, increment that key. If it's not initialize it to 1.
-             */
-            let new_cart = {...cart}; // reducer must be 'pure' so make a copy of the cart
+            // reducer must be 'pure' so make a copy of the cart
+            let new_cart = { ...cart };
             const key: keyof Cart = action.value as "string";
             if (new_cart[key] != undefined) {
                 new_cart[key] += 1;
@@ -47,11 +48,32 @@ function stateReducer(
  * @param menuItem A MenuItemProps object
  * @returns A JSX.Element
  */
-export function AddToCartButton({ menuItem }: { menuItem: MenuItemProps }) {
+export function AddToCartButton({
+    menuItem,
+    cart,
+    onAdd
+}: {
+    menuItem: MenuItemProps,
+    cart: { string?: number },
+    onAdd: Dispatch<SetStateAction<{}>>
+}) {
 
-    const [cart, dispatch] = useReducer(stateReducer, initialState);
+    const [state, dispatch] = useReducer(stateReducer, initialState);
 
     const addToCart = () => dispatch({ type: 'addtocart', value: menuItem.name });
+
+    function updateCart() {
+        // debugger;
+        const key: keyof Cart = menuItem.name as "string";
+        let new_cart = { ...cart };
+        if (new_cart[key] != undefined) {
+            new_cart[key] += 1;
+        }
+        else {
+            new_cart[key] = 1;
+        }
+        onAdd(new_cart);
+    }
 
 
     function addItemToCart() {
@@ -80,13 +102,30 @@ export function AddToCartButton({ menuItem }: { menuItem: MenuItemProps }) {
     }
 
     return (
-        <Button variant="contained" onClick={addToCart}>
+        <Button variant="contained" onClick={updateCart}>
             <AddShoppingCart />
         </Button>
     );
 }
 
-export function ShoppingCartIconCounter() {
+export function ShoppingCartIconCounter({ cart }: { cart: { string?: number } }) {
+
+    const numItemsInCart = calculateNumItemsInCart(cart);
+
+    function calculateNumItemsInCart(theCart: Cart) {
+        let totalNumItemsInCart: number = 0;
+        let item: keyof Cart;
+        for (item in theCart) {
+            let itemQuantity = theCart[item];
+            if (itemQuantity != undefined) {
+                totalNumItemsInCart = totalNumItemsInCart + itemQuantity;
+            }
+        }
+        return totalNumItemsInCart;
+    }
+
+    // const cart = useContext(CartContext);
+
     // const [cart] = useReducer(stateReducer, initialState);
     // const [numItemsInCart, setNumItemsInCart] = useState(() => {
     //     let totalNumItemsInCart: number = 0;
@@ -121,7 +160,7 @@ export function ShoppingCartIconCounter() {
     return (
         <>
             <Typography>
-                {/*numItemsInCart*/}
+                {numItemsInCart}
             </Typography>
             <ShoppingCart sx={{ mr: 2 }} />
         </>
