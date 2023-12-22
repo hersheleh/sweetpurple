@@ -1,11 +1,21 @@
-import type { Metadata } from 'next'
+'use client';
+
+// import type { Metadata } from 'next'
 import './globals.css'
 import { kalnia } from './fonts'
+import { purple } from "@mui/material/colors";
+import createTheme from "@mui/material/styles/createTheme";
+import ThemeProvider from '@mui/material/styles/ThemeProvider';
 
-export const metadata: Metadata = {
-    title: 'sweetpurple',
-    description: 'it\'s not magenta',
-}
+const theme = createTheme({
+    palette: {
+        primary: purple
+    },
+    typography: {
+        fontFamily: kalnia.style.fontFamily
+    }
+});
+
 
 export default function RootLayout({
     children,
@@ -14,7 +24,11 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={kalnia.className}>{children} </body>
+            <body className={kalnia.className}>
+                <ThemeProvider theme={theme}>
+                    {children}
+                </ThemeProvider>
+                </body>
         </html>
     )
 }
