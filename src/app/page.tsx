@@ -1,37 +1,30 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-
 import Container from '@mui/material/Container';
+import Menu from '@/app/menu';
+import menuLA from '@/data/menu_los_angeles.json';
 
-import Menu from './menu';
-import menuLA from './menu_Los_Angeles.json';
 import { MenuProps } from './MenuTypes';
-import Header from './header';
+import Header from '@/app/header';
+import { getCartFromLocalStorage } from '@/lib/utils';
 
-
-
+interface LocationData {
+    name: string;
+    id: string;
+}
 
 export default function Home() {
 
     const [cart, setCart] = useState({});
-    const [location, setLocation] = useState("Location");
+    const [location, setLocation] = useState("Los Angeles");
+    const [menu, setMenu] = useState({});
+
 
     useEffect(() => {
         setCart(getCartFromLocalStorage());
-    }, []);
 
-    function getCartFromLocalStorage() {
-        const cartKey = 'cart';
-        const cartJsonString = localStorage.getItem(cartKey);
-        if (cartJsonString != null) {
-            const localCart = JSON.parse(cartJsonString);
-            return localCart;
-        }
-        else {
-            return {};
-        }
-    }
+    },[]);
 
     return (
         <>
