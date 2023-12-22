@@ -1,5 +1,6 @@
 'use client'
 
+import type { Dispatch, SetStateAction } from 'react';
 import { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
@@ -12,6 +13,7 @@ import { all_locations } from '../menu_location_data';
 export default function Location() {
 
     const [cart, setCart] = useState({});
+    const [currentLocation, setCurrentLocation] = useState<string>();
 
     useEffect(() => {
         setCart(getCartFromLocalStorage());
@@ -23,9 +25,12 @@ export default function Location() {
     for (key in all_locations) {
         const location = all_locations[key];
         const location_name = location.name;
-        location_cards= location_cards.concat(
+        location_cards = location_cards.concat(
             <Grid item xs={6} key={key}>
-                <LocationCard name={location_name} />
+                <LocationCard
+                    id={key}
+                    name={location_name}
+                    onUpdate={setCurrentLocation} />
             </Grid>
         )
     }
@@ -45,9 +50,26 @@ export default function Location() {
     );
 }
 
-function LocationCard({ name }:{ name: string }) {
+function LocationCard({ id, name, onUpdate }: {
+    id: string,
+    name: string,
+    onUpdate: Dispatch<SetStateAction<string | undefined>>
+}) {
+
+    function updateLocation() {
+        saveLocationToLocalStorage(id);
+        onUpdate(id);
+
+    }
+
+    function saveLocationToLocalStorage(current_location: string) {
+        const location_key = "current_location";
+        localStorage.setItem(location_key, current_location);
+    }
+
+
     return (
-        <Card >
+        <Card onClick={updateLocation}>
             <Typography variant="h5">
                 {name}
             </Typography>

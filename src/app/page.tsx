@@ -20,7 +20,6 @@ export default function Home() {
     const [location, setLocation] = useState("Los Angeles");
     const [menu, setMenu] = useState({});
 
-
     useEffect(() => {
         setCart(getCartFromLocalStorage());
 
