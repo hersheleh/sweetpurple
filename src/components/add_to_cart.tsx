@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import AddShoppingCart from "@mui/icons-material/AddShoppingCart";
-import { MenuItemProps, Cart } from './MenuTypes'
+import { MenuItemProps, Cart } from '@/app/MenuTypes'
 
 
 /**

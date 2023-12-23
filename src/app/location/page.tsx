@@ -6,12 +6,12 @@ import { useRouter } from 'next/navigation';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import Header from '@/app/header';
+import Header from '@/components/header';
 import {
     getCartFromLocalStorage,
     getLocationFromLocalStorage } from '@/lib/utils';
 import { Typography } from '@mui/material';
-import { all_locations } from '@/app/menu_location_data';
+import { all_locations } from '@/data/menu_location_data';
 
 export default function Location() {
 

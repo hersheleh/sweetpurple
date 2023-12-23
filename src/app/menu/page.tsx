@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
 import Container from '@mui/material/Container';
-import Menu from '@/app/menu';
-import { all_locations } from '@/app/menu_location_data';
+import Menu from '@/components/menu';
+import { all_locations } from '@/data/menu_location_data';
 
 import { MenuProps } from '@/app/MenuTypes';
-import Header from '@/app/header';
+import Header from '@/components/header';
 import {
     getCartFromLocalStorage,
     getLocationFromLocalStorage

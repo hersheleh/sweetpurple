@@ -4,9 +4,9 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { AddToCartButton } from './add_to_cart';
-import { Cart, MenuItemProps, MenuProps, MenuSectionProps } from './MenuTypes';
-import allFoodItems from './food.json';
+import { AddToCartButton } from '@/components/add_to_cart';
+import { Cart, MenuItemProps, MenuProps, MenuSectionProps } from '@/app/MenuTypes';
+import allFoodItems from '@/data/all_produce.json';
 
 
 /**

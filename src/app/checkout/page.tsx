@@ -6,9 +6,9 @@ import Container from '@mui/material/Container';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import Header from '@/app/header';
+import Header from '@/components/header';
 import { Cart } from '@/app/MenuTypes';
-import { all_locations } from '@/app/menu_location_data';
+import { all_locations } from '@/data/menu_location_data';
 import {
     getLocationFromLocalStorage,
     getCartFromLocalStorage } from '@/lib/utils';
