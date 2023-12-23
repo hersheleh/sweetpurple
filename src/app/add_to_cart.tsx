@@ -6,36 +6,6 @@ import AddShoppingCart from "@mui/icons-material/AddShoppingCart";
 import { MenuItemProps, Cart } from './MenuTypes'
 
 
-
-// type AddToCartAction = { type: 'addtocart', value: string };
-
-// const initialState: Cart = {};
-
-
-// function stateReducer(
-//     // cart: Record<string, number>,
-//     cart: Cart,
-//     action: AddToCartAction): Cart {
-
-//     switch (action.type) {
-//         // Get the current cart. See if menuItem.name is in the cart.
-//         // If it is, increment that key. If it's not initialize it to 1.
-//         case "addtocart":
-//             // reducer must be 'pure' so make a copy of the cart
-//             let new_cart = { ...cart };
-//             const key: keyof Cart = action.value as "string";
-//             if (new_cart[key] != undefined) {
-//                 new_cart[key] += 1;
-//             }
-//             else {
-//                 new_cart[key] = 1;
-//             }
-//             return new_cart;
-//         default:
-//             throw new Error("Unknown action");
-//     }
-// }
-
 /**
  * A Button component which updates the user's cart by updating the 'cart'
  * key in local storage when a user clicks this Element
@@ -52,10 +22,6 @@ export function AddToCartButton({
     cart: { string?: number },
     onAdd: Dispatch<SetStateAction<{}>>
 }) {
-
-    // const [state, dispatch] = useReducer(stateReducer, initialState);
-
-    // const addToCart = () => dispatch({ type: 'addtocart', value: menuItem.name });
 
     function updateCart() {
         // const key: keyof Cart = menuItem.name as "string";
@@ -98,21 +64,6 @@ export function ShoppingCartIconCounter({ cart }: { cart: Cart }) {
         }
         return totalNumItemsInCart;
     }
-
-    // const cart = useContext(CartContext);
-
-    // const [cart] = useReducer(stateReducer, initialState);
-    // const [numItemsInCart, setNumItemsInCart] = useState(() => {
-    //     let totalNumItemsInCart: number = 0;
-    //     let item: keyof Cart;
-    //     for (item in cart) {
-    //         let itemQuantity = cart[item];
-    //         if (itemQuantity != undefined) {
-    //             totalNumItemsInCart = totalNumItemsInCart + itemQuantity;
-    //         }
-    //     }
-    //     return totalNumItemsInCart;
-    // });
 
     return (
         <>
