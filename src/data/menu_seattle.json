@@ -1,0 +1,36 @@
+{
+  "location": "Seattle, WA",
+  "menu": [
+    {
+      "category": "vegtables",
+      "items": [
+        {
+          "name": "red cabbage",
+          "price": 1.00
+        },
+        {
+          "name": "turnips"
+        },
+        {
+          "name": "purple sweet potato",
+          "price": 3.00
+        }
+      ]
+    },
+    {
+      "category": "fruits",
+      "items" : [
+        {
+          "name": "eggplant",
+          "price": 0.20
+        },
+        {
+          "name": "blackberries"
+        },
+        {
+          "name": "blueberries"
+        }
+      ]
+    }
+  ]
+}

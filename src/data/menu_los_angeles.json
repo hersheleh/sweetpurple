@@ -1,0 +1,32 @@
+{
+  "location":"los_angeles",
+   "menu": [
+    {
+      "category": "vegtables",
+      "items": [
+        {
+          "name": "red onion",
+          "price": 1
+        },
+        {
+          "name": "beats"
+        },
+        {
+          "name": "eggplant",
+          "price": 0.60
+        }
+      ]
+    },
+    {
+      "category": "fruits",
+      "items" : [
+        {
+          "name": "blackberries"
+        },
+        {
+          "name": "figs"
+        }
+      ]
+    }
+  ]
+}
