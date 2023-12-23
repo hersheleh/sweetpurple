@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import NextLink from 'next/link';
 import Link from "@mui/material/Link";
 import { AppBar, Toolbar, Typography } from "@mui/material";
@@ -9,14 +10,24 @@ export default function Header({ cart, location }: {
     cart: { string?: number },
     location: string
 }) {
+    const locationWidget = (
+        <>
+            <LocationOn sx={{ mr: 2 }} />
+            <Link component={NextLink} href="/location"
+                sx={{ color: "white" }}>
+                <Typography>Location: {location}</Typography>
+            </Link>
+        </>
+    );
+
     return (
         <AppBar position="relative">
             <Toolbar>
-                <LocationOn sx={{ mr: 2 }} />
-                <Link component={NextLink} href="/location"
-                    sx={{ color: "white" }}>
-                    <Typography>Location: {location}</Typography>
-                </Link>
+                {(location == "") ? (
+                    <></>
+                ) : (
+                    locationWidget
+                )}
                 <Typography
                     variant="h4"
                     color="inherit"
@@ -26,6 +37,10 @@ export default function Header({ cart, location }: {
                     sweetpurple
                 </Typography>
                 <ShoppingCartIconCounter cart={cart} />
+                <Link component={NextLink} href="/checkout"
+                    sx={{ color: "white" }}>
+                    <Typography> Checkout </Typography>
+                </Link>
             </Toolbar>
         </AppBar>
 

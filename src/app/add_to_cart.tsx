@@ -127,9 +127,6 @@ export function ShoppingCartIconCounter({ cart }: { cart: Cart }) {
                 {numItemsInCart}
             </Typography>
             <ShoppingCart sx={{ ml: 2, mr: 2 }} />
-            <Typography>
-                Shopping Cart
-            </Typography>
         </>
     )
 }

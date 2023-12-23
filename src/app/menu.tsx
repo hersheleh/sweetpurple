@@ -76,7 +76,6 @@ function MenuItem({ menuItem, cart, onAdd }: {
     cart: { string?: number }
     onAdd: Dispatch<SetStateAction<{}>>
 }) {
-    // debugger;
 
     const menuItemName = menuItem.name as keyof typeof allFoodItems;
     let defaultMenuItem = allFoodItems[menuItemName];

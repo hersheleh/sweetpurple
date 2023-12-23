@@ -2,25 +2,34 @@
 
 import type { Dispatch, SetStateAction } from 'react';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Header from '@/app/header';
-import { getCartFromLocalStorage } from '@/lib/utils';
+import {
+    getCartFromLocalStorage,
+    getLocationFromLocalStorage } from '@/lib/utils';
 import { Typography } from '@mui/material';
-import { all_locations } from '../menu_location_data';
+import { all_locations } from '@/app/menu_location_data';
 
 export default function Location() {
 
     const [cart, setCart] = useState({});
-    const [currentLocation, setCurrentLocation] = useState<string>();
+    const [currentLocation, setCurrentLocation] = useState("");
+
+    const currentLocationKey = currentLocation as keyof typeof all_locations;
+    const currentLocationName = currentLocation ?
+        all_locations[currentLocationKey].name : "";
 
     useEffect(() => {
         setCart(getCartFromLocalStorage());
+        setCurrentLocation(getLocationFromLocalStorage());
     }, []);
 
     let location_cards: JSX.Element[] = [];
     let key: keyof typeof all_locations;
+
 
     for (key in all_locations) {
         const location = all_locations[key];
@@ -37,7 +46,7 @@ export default function Location() {
 
     return (
         <>
-            <Header cart={cart} location="Los Angeles" />
+            <Header cart={cart} location={currentLocationName} />
             <Container>
                 <Typography variant="h4">
                     Choose Location
@@ -53,20 +62,21 @@ export default function Location() {
 function LocationCard({ id, name, onUpdate }: {
     id: string,
     name: string,
-    onUpdate: Dispatch<SetStateAction<string | undefined>>
+    onUpdate: Dispatch<SetStateAction<string>>
 }) {
+
+    const router = useRouter();
 
     function updateLocation() {
         saveLocationToLocalStorage(id);
         onUpdate(id);
-
+        router.push('/menu');
     }
 
     function saveLocationToLocalStorage(current_location: string) {
         const location_key = "current_location";
         localStorage.setItem(location_key, current_location);
     }
-
 
     return (
         <Card onClick={updateLocation}>
