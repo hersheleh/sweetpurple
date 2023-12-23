@@ -3,15 +3,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import AddShoppingCart from "@mui/icons-material/AddShoppingCart";
-import { MenuItemProps } from './MenuTypes'
-import { useReducer, useContext } from 'react';
+import { MenuItemProps, Cart } from './MenuTypes'
 
-/**
- * A
- */
-interface Cart {
-    string?: number
-};
 
 
 // type AddToCartAction = { type: 'addtocart', value: string };

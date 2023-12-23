@@ -1,3 +1,7 @@
+export interface Cart {
+    string?: number
+};
+
 export interface MenuProps {
     location: string,
     menu: MenuSectionProps[];

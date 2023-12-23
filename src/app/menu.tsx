@@ -5,7 +5,7 @@ import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { AddToCartButton } from './add_to_cart';
-import { MenuItemProps, MenuProps, MenuSectionProps } from './MenuTypes';
+import { Cart, MenuItemProps, MenuProps, MenuSectionProps } from './MenuTypes';
 import allFoodItems from './food.json';
 
 
@@ -17,7 +17,7 @@ import allFoodItems from './food.json';
  */
 export default function Menu({ menu, cart, onAdd }: {
     menu: MenuProps,
-    cart: { string?: number },
+    cart: Cart,
     onAdd: Dispatch<SetStateAction<{}>>
 }) {
 
@@ -55,7 +55,6 @@ function MenuSection({ menu_section, cart, onAdd }: {
                 onAdd={onAdd}
                 menuItem={item} />
         </Grid>
-
     );
 
     return (
@@ -73,7 +72,7 @@ function MenuSection({ menu_section, cart, onAdd }: {
 
 function MenuItem({ menuItem, cart, onAdd }: {
     menuItem: MenuItemProps,
-    cart: { string?: number }
+    cart: Cart
     onAdd: Dispatch<SetStateAction<{}>>
 }) {
 
@@ -83,9 +82,12 @@ function MenuItem({ menuItem, cart, onAdd }: {
     let finalMenuItem = {...menuItem}; // make a copy of menuItem
     finalMenuItem.description = defaultMenuItem.description;
     finalMenuItem.calories = defaultMenuItem.calories;
+    finalMenuItem.price = defaultMenuItem.price;
+
     if (menuItem.price) {
         finalMenuItem.price = menuItem.price;
     }
+
 
     return (
         <Card>
@@ -94,7 +96,7 @@ function MenuItem({ menuItem, cart, onAdd }: {
             </Typography>
             <Typography> {finalMenuItem.description} </Typography>
             <Typography> calories {finalMenuItem.calories} </Typography>
-            <Typography> price {finalMenuItem.price} </Typography>
+            <Typography> price ${finalMenuItem.price.toFixed(2)} </Typography>
             <AddToCartButton menuItem={finalMenuItem} cart={cart} onAdd={onAdd} />
         </Card>
     );

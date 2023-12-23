@@ -30,7 +30,6 @@ export default function Location() {
     let location_cards: JSX.Element[] = [];
     let key: keyof typeof all_locations;
 
-
     for (key in all_locations) {
         const location = all_locations[key];
         const location_name = location.name;

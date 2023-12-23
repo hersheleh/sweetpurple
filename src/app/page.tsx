@@ -24,13 +24,7 @@ export default function Home() {
 
     const [cart, setCart] = useState({});
     const [currentLocation, setCurrentLocation] = useState("");
-    let menu = all_locations.los_angeles.menu;
-    // if (location) {
-    //     const key = location as keyof typeof all_locations;
-    //     const location = all_locations[key];
-    //     menu = location.menu;
-    // }
-    let locations = all_locations;
+
 
     const router = useRouter();
     // if location is set
