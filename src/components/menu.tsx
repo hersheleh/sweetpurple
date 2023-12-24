@@ -1,9 +1,10 @@
 
 import type { Dispatch, SetStateAction } from 'react';
 import { kalnia } from '@/app/fonts';
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -11,7 +12,6 @@ import Typography from '@mui/material/Typography';
 import { AddToCartButton } from '@/components/add_to_cart';
 import { Cart, MenuItemProps, MenuProps, MenuSectionProps } from '@/app/MenuTypes';
 import allFoodItems from '@/data/all_produce.json';
-import { Divider } from '@mui/material';
 
 
 /**
@@ -49,7 +49,7 @@ export default function Menu({ menu, cart, onAdd }: {
 
 function MenuSection({ menu_section, cart, onAdd }: {
     menu_section: MenuSectionProps,
-    cart: Cart,
+     cart: Cart,
     onAdd: Dispatch<SetStateAction<{}>>
 }) {
 
@@ -100,7 +100,7 @@ function MenuItemCard({ menuItem, cart, onAdd }: {
             <Typography variant="h5">
                 {finalMenuItem.name}
             </Typography>
-            <Typography> {finalMenuItem.description}f </Typography>
+            <Typography> {finalMenuItem.description} </Typography>
             <List>
                 <ListItem>
                     <ListItemText primary="calories:" />

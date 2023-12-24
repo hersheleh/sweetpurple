@@ -7,7 +7,7 @@ import { kalnia } from '@/app/fonts';
 import Link from "@mui/material/Link";
 import { AppBar, Toolbar, Typography } from "@mui/material";
 import LocationOn from '@mui/icons-material/LocationOn';
-import { ShoppingCartIconCounter } from  '@/components/add_to_cart';
+import { ShoppingCartIconCounter } from '@/components/add_to_cart';
 import { Cart } from '@/app/MenuTypes';
 
 const theme = createTheme({
@@ -43,15 +43,19 @@ export default function Header({ cart, location }: {
                 ) : (
                     locationWidget
                 )}
-                <Typography
-                    className={kalnia.className}
-                    variant="h4"
-                    color="inherit"
+                <Link
                     align="center"
                     noWrap
-                    sx={{ flex: 1 }}>
-                    sweetpurple
-                </Typography>
+                    sx={{ flex: 1 }}
+                    component={NextLink} href="/menu">
+                    <Typography
+                        variant="h4"
+                        className={kalnia.className}
+                        color="white"
+                    >
+                        sweetpurple
+                    </Typography>
+                </Link>
                 <ShoppingCartIconCounter cart={cart} />
                 <Link component={NextLink} href="/checkout"
                     sx={{ color: "white" }}>

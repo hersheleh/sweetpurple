@@ -1,26 +1,26 @@
  {
    "purple sweet potato": {
-     "description": "you can make pie with it",
+     "description": "You can make pie with it.",
      "calories" : 130,
      "price" : 2.00
    },
    "red cabbage": {
-     "description" : "an cabbage which is red",
+     "description" : "A cabbage which is red.",
      "calories": 44,
      "price": 1.00
    },
    "red onion": {
-     "description" : "an onion which is red",
+     "description" : "An onion which is red.",
      "calories": 40,
      "price": 0.40
    },
-   "beats": {
-     "description" : "have you had borscht",
+   "beets": {
+     "description" : "Have you had borscht?",
      "calories":  58,
      "price" : 0.50
    },
    "eggplant": {
-     "description": "it\"s not an egg",
+     "description": "It\"s not an egg.",
      "calories": 90,
      "price": 0.80
    },
@@ -30,17 +30,17 @@
      "price": 0.70
    },
    "blackberries": {
-     "description": "The best business keyboard",
+     "description": "The best keyboard for business.",
      "calories": 62,
      "price": 1.20
    },
    "figs": {
-     "description": "not quite newtons",
+     "description": "Not quite newtons.",
      "calories": 37,
      "price": 1.30
    },
    "blueberries": {
-     "description": "are they purple?",
+     "description": "Are they purple?",
      "calories": 20,
      "price": 2
    }
