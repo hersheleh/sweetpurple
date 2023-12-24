@@ -19,19 +19,18 @@ export function AddToCartButton({
     onAdd
 }: {
     menuItem: MenuItemProps,
-    cart: { string?: number },
+    cart: Cart,
     onAdd: Dispatch<SetStateAction<{}>>
 }) {
 
     function updateCart() {
-        // const key: keyof Cart = menuItem.name as "string";
         const key = menuItem.name as keyof Cart;
         let new_cart = { ...cart };
         if (new_cart[key] != undefined) {
-            new_cart[key] += 1;
+            new_cart[key].quantity += 1;
         }
         else {
-            new_cart[key] = 1;
+            new_cart[key] = {quantity: 1, price: menuItem.price};
         }
         onAdd(new_cart);
         saveCartToLocalStorage(new_cart);
@@ -44,7 +43,8 @@ export function AddToCartButton({
 
     return (
         <Button variant="contained" onClick={updateCart}>
-            <AddShoppingCart sx={{ mr: 2 }} /> Add to Cart
+            {/*<AddShoppingCart sx={{ mr: 2 }} /> */}
+            Add to Cart
         </Button>
     );}
 
@@ -57,8 +57,8 @@ export function ShoppingCartIconCounter({ cart }: { cart: Cart }) {
         let totalNumItemsInCart: number = 0;
         let item: keyof Cart;
         for (item in theCart) {
-            let itemQuantity = theCart[item];
-            if (itemQuantity != undefined) {
+            let itemQuantity = theCart[item]?.quantity;
+             if (itemQuantity != undefined) {
                 totalNumItemsInCart = totalNumItemsInCart + itemQuantity;
             }
         }

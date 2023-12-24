@@ -1,13 +1,28 @@
 import { useEffect } from 'react';
 import NextLink from 'next/link';
+import createTheme from '@mui/material/styles/createTheme';
+import ThemeProvider from '@mui/material/styles/ThemeProvider';
+import { purple } from '@mui/material/colors';
+import { kalnia } from '@/app/fonts';
 import Link from "@mui/material/Link";
 import { AppBar, Toolbar, Typography } from "@mui/material";
 import LocationOn from '@mui/icons-material/LocationOn';
-import { ShoppingCartIconCounter } from "./add_to_cart";
+import { ShoppingCartIconCounter } from  '@/components/add_to_cart';
+import { Cart } from '@/app/MenuTypes';
+
+const theme = createTheme({
+    palette: {
+        primary: purple
+    },
+    typography: {
+        fontFamily: kalnia.style.fontFamily
+    }
+});
+
 
 
 export default function Header({ cart, location }: {
-    cart: { string?: number },
+    cart: Cart,
     location: string
 }) {
     const locationWidget = (
@@ -29,6 +44,7 @@ export default function Header({ cart, location }: {
                     locationWidget
                 )}
                 <Typography
+                    className={kalnia.className}
                     variant="h4"
                     color="inherit"
                     align="center"

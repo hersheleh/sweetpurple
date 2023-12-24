@@ -1,5 +1,12 @@
+
+/**
+ * This is the cart object saved to local storage.
+ */
 export interface Cart {
-    string?: number
+    string?: {
+        quantity: number,
+        price?:number
+    }
 };
 
 export interface MenuProps {

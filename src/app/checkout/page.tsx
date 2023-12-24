@@ -11,7 +11,8 @@ import { Cart } from '@/app/MenuTypes';
 import { all_locations } from '@/data/menu_location_data';
 import {
     getLocationFromLocalStorage,
-    getCartFromLocalStorage } from '@/lib/utils';
+    getCartFromLocalStorage
+} from '@/lib/utils';
 
 
 export default function CheckoutPage() {
@@ -34,12 +35,11 @@ export default function CheckoutPage() {
     let item: keyof Cart;
     for (item in cart) {
         cartElement = cartElement.concat(
-            <List>
-                <ListItem key={item}>
-                    <ListItemText primary={item} />
-                    {cart[item]} x
-                </ListItem>
-            </List>
+
+            <ListItem key={item}>
+                <ListItemText primary={item} />
+                {cart[item]?.quantity} x ${cart[item]?.price?.toFixed(2)}
+            </ListItem>
         )
     }
 
@@ -51,7 +51,9 @@ export default function CheckoutPage() {
                     <Typography variant="h3">
                         Checkout
                     </Typography>
-                    {cartElement}
+                    <List>
+                        {cartElement}
+                    </List>
                 </Container>
             </main>
         </>

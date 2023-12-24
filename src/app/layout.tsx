@@ -2,7 +2,7 @@
 
 // import type { Metadata } from 'next'
 import './globals.css'
-import { kalnia } from './fonts'
+import { kalnia, roboto, noto_serif } from './fonts'
 import { purple } from "@mui/material/colors";
 import createTheme from "@mui/material/styles/createTheme";
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
@@ -12,7 +12,7 @@ const theme = createTheme({
         primary: purple
     },
     typography: {
-        fontFamily: kalnia.style.fontFamily
+        fontFamily: noto_serif.style.fontFamily
     }
 });
 
@@ -24,7 +24,8 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={kalnia.className}>
+            <body // className={kalnia.className}
+            >
                 <ThemeProvider theme={theme}>
                     {children}
                 </ThemeProvider>
