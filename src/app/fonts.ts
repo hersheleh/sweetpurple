@@ -1,6 +1,5 @@
-import { Roboto, Noto_Sans, Noto_Serif, Noto_Nastaliq_Urdu } from 'next/font/google'
-
-import localFont from 'next/font/local'
+import { Roboto, Noto_Serif, Noto_Nastaliq_Urdu } from 'next/font/google';
+import localFont from 'next/font/local';
 
 
 export const kalnia = localFont({
@@ -8,20 +7,18 @@ export const kalnia = localFont({
   display: 'swap'
 })
 
-// export const inter = Inter({ subsets: ['latin'] })
 export const roboto = Roboto({
   weight: '400',
   subsets: ['latin'],
   display: 'swap'
 })
 
-export const noto_sans = Noto_Sans({
-  weight: '700',
-  subsets: ['latin'],
-  display: 'swap'
+export const noto_serif = Noto_Serif({
+    subsets: ['latin'],
+    display: 'swap'
 })
 
-export const noto_serif = Noto_Serif({
+export const noto_nastaliq_urdu = Noto_Nastaliq_Urdu({
     subsets: ['latin'],
     display: 'swap'
 })

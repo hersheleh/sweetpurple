@@ -12,6 +12,10 @@ import {
 } from '@/lib/utils';
 
 
+/**
+ * The HomePage
+ *
+ */
 export default function Home() {
 
     const [cart, setCart] = useState({});
@@ -19,13 +23,14 @@ export default function Home() {
 
 
     const router = useRouter();
-    // if location is set
-
 
     useEffect(() => {
+        // Read state variables from local storage when rendering on the client
         setCart(getCartFromLocalStorage());
         setCurrentLocation(getLocationFromLocalStorage())
 
+        // If current location is set and is valid, route to the menu page
+        // otherwise route to the location page so user can set location.
         if (currentLocation == "" || !(currentLocation in all_locations)) {
             router.push('/location');
         }
@@ -35,6 +40,7 @@ export default function Home() {
 
     }, [currentLocation, router]);
 
+    // Just render the Header on this page, if page shows up before redirect.
     return (
         <>
             <Header cart={cart} location={currentLocation} />
