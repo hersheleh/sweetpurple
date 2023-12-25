@@ -1,24 +1,23 @@
 import { useEffect } from 'react';
 import NextLink from 'next/link';
 import createTheme from '@mui/material/styles/createTheme';
-import ThemeProvider from '@mui/material/styles/ThemeProvider';
+// import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import { purple } from '@mui/material/colors';
 import { kalnia } from '@/app/fonts';
 import Link from "@mui/material/Link";
 import { AppBar, Toolbar, Typography } from "@mui/material";
 import LocationOn from '@mui/icons-material/LocationOn';
-import { ShoppingCartIconCounter } from '@/components/add_to_cart';
+import { ShoppingCartItemCounter } from '@/components/add_to_cart';
 import { Cart } from '@/app/MenuTypes';
 
-const theme = createTheme({
-    palette: {
-        primary: purple
-    },
-    typography: {
-        fontFamily: kalnia.style.fontFamily
-    }
-});
-
+// const theme = createTheme({
+//     palette: {
+//         primary: purple
+//     },
+//     typography: {
+//         fontFamily: kalnia.style.fontFamily
+//     }
+// });
 
 
 export default function Header({ cart, location }: {
@@ -28,9 +27,9 @@ export default function Header({ cart, location }: {
     const locationWidget = (
         <>
             <LocationOn sx={{ mr: 2 }} />
-            <Link component={NextLink} href="/location"
+            <Link className="prop-location" component={NextLink} href="/location"
                 sx={{ color: "white" }}>
-                <Typography>Location: {location}</Typography>
+                <Typography>{location}</Typography>
             </Link>
         </>
     );
@@ -56,7 +55,7 @@ export default function Header({ cart, location }: {
                         sweetpurple
                     </Typography>
                 </Link>
-                <ShoppingCartIconCounter cart={cart} />
+                <ShoppingCartItemCounter cart={cart} />
                 <Link component={NextLink} href="/checkout"
                     sx={{ color: "white" }}>
                     <Typography> Checkout </Typography>
