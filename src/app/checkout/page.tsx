@@ -41,7 +41,7 @@ export default function CheckoutPage() {
         if (!cart_item || !cart_item.price) {
             continue;
         }
-        total += cart_item.price;
+        total += (cart_item.price * cart_item.quantity);
         cartElement = cartElement.concat(
 
             <ListItem key={item}>
