@@ -26,7 +26,7 @@ export function AddToCartButton({
 
     function updateCart() {
         const key = menuItem.name as keyof Cart;
-        let new_cart = { ...cart };
+        let new_cart = { ...cart }; // copy contents of cart
         if (new_cart[key] != undefined) {
             new_cart[key].quantity += 1;
         }
