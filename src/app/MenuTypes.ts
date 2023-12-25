@@ -1,6 +1,7 @@
 
 /**
  * This is the cart object saved to local storage.
+ *
  */
 export interface Cart {
     string?: {
@@ -20,7 +21,7 @@ export interface MenuSectionProps {
 }
 
 export interface MenuItemProps {
-    name: "string",
+    name: string,
     price?: number,
     description?: string;
     calories?: number;

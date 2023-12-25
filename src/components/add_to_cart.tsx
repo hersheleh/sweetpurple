@@ -1,17 +1,18 @@
 import type { Dispatch, SetStateAction } from 'react'
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import ShoppingCart from "@mui/icons-material/ShoppingCart";
-import AddShoppingCart from "@mui/icons-material/AddShoppingCart";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { MenuItemProps, Cart } from '@/app/MenuTypes'
 
 
 /**
- * A Button component which updates the user's cart by updating the 'cart'
- * key in local storage when a user clicks this Element
+ * A Button component which adds `menuItem` to the `cart` object and
+ * saves it to the "cart" key in localStorage onClick
  *
- * @param menuItem A MenuItemProps object
- * @returns A JSX.Element
+ * @param menuItem - A MenuItemProps object
+ * @param cart - A Cart object
+ * @param onAdd - passes new cart to this function
+ * @returns - A JSX.Element
  */
 export function AddToCartButton({
     menuItem,
@@ -30,7 +31,7 @@ export function AddToCartButton({
             new_cart[key].quantity += 1;
         }
         else {
-            new_cart[key] = {quantity: 1, price: menuItem.price};
+            new_cart[key] = { quantity: 1, price: menuItem.price };
         }
         onAdd(new_cart);
         saveCartToLocalStorage(new_cart);
@@ -46,23 +47,27 @@ export function AddToCartButton({
             {/*<AddShoppingCart sx={{ mr: 2 }} /> */}
             Add to Cart
         </Button>
-    );}
+    );
+}
 
 
-export function ShoppingCartIconCounter({ cart }: { cart: Cart }) {
+/**
+ * A Component which displays the total quantity of items in `cart`
+ * by taking the sum of all cart[item].quantity values in the cart.
+ *
+ * @param cart - A `Cart` containing item name, quantity & price
+ * @returns - JSX.Element
+ */
+export function ShoppingCartItemCounter({ cart }: { cart: Cart }) {
 
-    const numItemsInCart = calculateNumItemsInCart(cart);
+    let numItemsInCart = 0; // sum of the quantity keys of all items
+    let item: keyof Cart;
 
-    function calculateNumItemsInCart(theCart: Cart) {
-        let totalNumItemsInCart: number = 0;
-        let item: keyof Cart;
-        for (item in theCart) {
-            let itemQuantity = theCart[item]?.quantity;
-             if (itemQuantity != undefined) {
-                totalNumItemsInCart = totalNumItemsInCart + itemQuantity;
-            }
+    for (item in cart) {
+        let itemQuantity = cart[item]?.quantity;
+        if (itemQuantity != undefined) {
+            numItemsInCart = numItemsInCart + itemQuantity;
         }
-        return totalNumItemsInCart;
     }
 
     return (
@@ -70,8 +75,7 @@ export function ShoppingCartIconCounter({ cart }: { cart: Cart }) {
             <Typography>
                 {numItemsInCart}
             </Typography>
-            <ShoppingCart sx={{ ml: 2, mr: 2 }} />
+            <ShoppingCartIcon sx={{ ml: 2, mr: 2 }} />
         </>
     )
 }
-
