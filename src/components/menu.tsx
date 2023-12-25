@@ -23,7 +23,7 @@ import allFoodItems from '@/data/all_produce.json';
 export default function Menu({ menu, cart, onAdd }: {
     menu: MenuProps,
     cart: Cart,
-    onAdd: Dispatch<SetStateAction<{}>>
+    onAdd: Dispatch<SetStateAction<Cart>>
 }) {
 
     const menuSections = menu.menu.map(section =>
@@ -35,7 +35,7 @@ export default function Menu({ menu, cart, onAdd }: {
 
     return (
         <>
-            <Typography className={kalnia.className}variant="h2">
+            <Typography className={kalnia.className} variant="h2">
                 Menu
             </Typography>
             <Divider variant="middle" />
@@ -49,8 +49,8 @@ export default function Menu({ menu, cart, onAdd }: {
 
 function MenuSection({ menu_section, cart, onAdd }: {
     menu_section: MenuSectionProps,
-     cart: Cart,
-    onAdd: Dispatch<SetStateAction<{}>>
+    cart: Cart,
+    onAdd: Dispatch<SetStateAction<Cart>>
 }) {
 
     const menuItems = menu_section.items.map(item =>
@@ -65,7 +65,7 @@ function MenuSection({ menu_section, cart, onAdd }: {
 
     return (
         <>
-            <Typography className={ kalnia.className } variant="h3">
+            <Typography className={kalnia.className} variant="h3">
                 {menu_section.category}
             </Typography>
             <Divider variant="middle" />
@@ -78,8 +78,8 @@ function MenuSection({ menu_section, cart, onAdd }: {
 
 function MenuItemCard({ menuItem, cart, onAdd }: {
     menuItem: MenuItemProps,
-    cart: Cart
-    onAdd: Dispatch<SetStateAction<{}>>
+    cart: Cart,
+    onAdd: Dispatch<SetStateAction<Cart>>
 }) {
 
     const menuItemName = menuItem.name as keyof typeof allFoodItems;

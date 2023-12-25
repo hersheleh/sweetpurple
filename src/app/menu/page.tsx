@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Container from '@mui/material/Container';
 import Menu from '@/components/menu';
 import { all_locations } from '@/data/menu_location_data';
-
+import { Cart } from '@/app/MenuTypes';
 import { MenuProps } from '@/app/MenuTypes';
 import Header from '@/components/header';
 import {
@@ -16,7 +16,7 @@ import {
 
 export default function MenuPage() {
 
-    const [cart, setCart] = useState({});
+    const [cart, setCart] = useState<Cart>({});
     const [currentLocation, setCurrentLocation] = useState("");
 
     const currentLocationKey = currentLocation as keyof typeof all_locations;

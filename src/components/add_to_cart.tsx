@@ -7,11 +7,11 @@ import { MenuItemProps, Cart } from '@/app/MenuTypes'
 
 /**
  * A Button component which adds `menuItem` to the `cart` object and
- * saves it to the "cart" key in localStorage onClick
+ * saves it to the "cart" key in localStorage when clicked
  *
  * @param menuItem - A MenuItemProps object
  * @param cart - A Cart object
- * @param onAdd - passes new cart to this function
+ * @param onAdd - pass a react useState set function here
  * @returns - A JSX.Element
  */
 export function AddToCartButton({
@@ -21,7 +21,7 @@ export function AddToCartButton({
 }: {
     menuItem: MenuItemProps,
     cart: Cart,
-    onAdd: Dispatch<SetStateAction<{}>>
+    onAdd: Dispatch<SetStateAction<Cart>>
 }) {
 
     function updateCart() {
