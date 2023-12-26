@@ -9,7 +9,10 @@ import ThemeProvider from '@mui/material/styles/ThemeProvider';
 
 const theme = createTheme({
     palette: {
-        primary: purple
+        primary: purple,
+        background: {
+            paper: '#fff',
+        }
     },
     typography: {
         fontFamily: noto_serif.style.fontFamily
