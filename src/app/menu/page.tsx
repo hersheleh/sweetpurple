@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
 import Container from '@mui/material/Container';
-import Menu from '@/components/menu';
+import Paper from '@mui/material/Paper';
+import { Menu } from '@/components/menu';
 import { all_locations } from '@/data/menu_location_data';
 import { Cart } from '@/app/MenuTypes';
 import { MenuProps } from '@/app/MenuTypes';
@@ -11,7 +12,7 @@ import Header from '@/components/header';
 import {
     getCartFromLocalStorage,
     getLocationFromLocalStorage
-} from '@/lib/utils';
+} from '@/utils/utils';
 
 
 export default function MenuPage() {
@@ -58,11 +59,17 @@ export default function MenuPage() {
             <Header cart={cart} location={currentLocationName} />
             <main>
                 <Container>
+                    <Paper elevation={3}
+                        sx={{
+                            mt: 5,
+                            bgcolor: 'background.paper'
+                        }}>
                     {currentLocation == "" ? (
                         <></>
                     ) : (
                         menuElement
                     )}
+                </Paper>
                 </Container>
             </main>
         </>

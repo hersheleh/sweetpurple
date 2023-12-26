@@ -9,7 +9,7 @@ import Container from '@mui/material/Container';
 import Header from '@/components/header';
 import {
     getCartFromLocalStorage,
-    getLocationFromLocalStorage } from '@/lib/utils';
+    getLocationFromLocalStorage } from '@/utils/utils';
 import { Typography } from '@mui/material';
 import { all_locations } from '@/data/menu_location_data';
 
@@ -27,17 +27,17 @@ export default function Location() {
         setCurrentLocation(getLocationFromLocalStorage());
     }, []);
 
-    let location_cards: JSX.Element[] = [];
+    let locationCards: JSX.Element[] = [];
     let key: keyof typeof all_locations;
 
     for (key in all_locations) {
         const location = all_locations[key];
-        const location_name = location.name;
-        location_cards = location_cards.concat(
+        const locationName = location.name;
+        locationCards = locationCards.concat(
             <Grid item xs={6} key={key}>
                 <LocationCard
                     id={key}
-                    name={location_name}
+                    name={locationName}
                     onUpdate={setCurrentLocation} />
             </Grid>
         )
@@ -51,7 +51,7 @@ export default function Location() {
                     Choose Location
                 </Typography>
                 <Grid container spacing={8}>
-                    {location_cards}
+                    {locationCards}
                 </Grid>
             </Container>
         </>
@@ -72,9 +72,9 @@ function LocationCard({ id, name, onUpdate }: {
         router.push('/menu');
     }
 
-    function saveLocationToLocalStorage(current_location: string) {
-        const location_key = "current_location";
-        localStorage.setItem(location_key, current_location);
+    function saveLocationToLocalStorage(currentLocation: string) {
+        const locationKey = "current_location";
+        localStorage.setItem(locationKey, currentLocation);
     }
 
     return (

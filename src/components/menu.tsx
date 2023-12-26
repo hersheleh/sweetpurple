@@ -1,6 +1,4 @@
-
 import type { Dispatch, SetStateAction } from 'react';
-import { kalnia } from '@/app/fonts';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Divider from '@mui/material/Divider';
@@ -9,18 +7,21 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
+import { kalnia } from '@/app/fonts';
 import { AddToCartButton } from '@/components/add_to_cart';
 import { Cart, MenuItemProps, MenuProps, MenuSectionProps } from '@/app/MenuTypes';
 import allFoodItems from '@/data/all_produce.json';
 
 
 /**
- * A Component which displays a `menu` of items.
+ * A Component which displays the given `menu`.
  *
  * @param menu - An Array of MenuItemProps
+ * @param cart - passes this to MenuSections Component
+ * @param onAdd - passes this to MenuSections Component
  * @returns A JSX.Element
  */
-export default function Menu({ menu, cart, onAdd }: {
+export function Menu({ menu, cart, onAdd }: {
     menu: MenuProps,
     cart: Cart,
     onAdd: Dispatch<SetStateAction<Cart>>
@@ -29,31 +30,43 @@ export default function Menu({ menu, cart, onAdd }: {
     const menuSections = menu.menu.map(section =>
 
         <Box key={section.category}>
-            <MenuSection menu_section={section} cart={cart} onAdd={onAdd} />
+            <MenuSection menuSection={section} cart={cart} onAdd={onAdd} />
         </Box>
     );
 
     return (
         <>
-            <Typography className={kalnia.className} variant="h2">
-                Menu
-            </Typography>
-            <Divider variant="middle" />
+        <Typography
+            align="center"
+            sx={{ flex: 1 }}
+            className={kalnia.className}
+            variant="h2">
+            Menu
+        </Typography>
+
             <Typography variant="h5">
                 {menuSections}
             </Typography>
-
         </>
+
     );
 }
 
-function MenuSection({ menu_section, cart, onAdd }: {
-    menu_section: MenuSectionProps,
+/**
+ * A Component which display one menu section.
+ *
+ * @param menu - An Array of MenuItemProps
+ * @param cart - passes this to MenuItemCard Component
+ * @param onAdd - passes this to MenuItemCard Component
+ * @returns A JSX.Element
+ */
+export function MenuSection({ menuSection, cart, onAdd }: {
+    menuSection: MenuSectionProps,
     cart: Cart,
     onAdd: Dispatch<SetStateAction<Cart>>
 }) {
 
-    const menuItems = menu_section.items.map(item =>
+    const menuItems = menuSection.items.map(item =>
 
         <Grid item xs={4} key={item.name}>
             <MenuItemCard
@@ -65,18 +78,20 @@ function MenuSection({ menu_section, cart, onAdd }: {
 
     return (
         <>
-            <Typography className={kalnia.className} variant="h3">
-                {menu_section.category}
+            <Typography
+                sx={{ ml: 3 }}
+                className={kalnia.className} variant="h3">
+                {menuSection.category}
             </Typography>
             <Divider variant="middle" />
-            <Grid container spacing={16}>
+            <Grid container spacing={4}>
                 {menuItems}
             </Grid>
         </>
     );
 }
 
-function MenuItemCard({ menuItem, cart, onAdd }: {
+export function MenuItemCard({ menuItem, cart, onAdd }: {
     menuItem: MenuItemProps,
     cart: Cart,
     onAdd: Dispatch<SetStateAction<Cart>>
@@ -94,20 +109,22 @@ function MenuItemCard({ menuItem, cart, onAdd }: {
         finalMenuItem.price = menuItem.price;
     }
 
-
     return (
-        <Card>
+        <Card sx={{ mx: 6, my: 3 }} elevation={1}>
             <Typography variant="h5">
                 {finalMenuItem.name}
             </Typography>
-            <Typography> {finalMenuItem.description} </Typography>
+            <Divider />
+            <Typography title="description" variant="body1">
+                {finalMenuItem.description}
+            </Typography>
             <List>
-                <ListItem>
+                <ListItem title="calories">
                     <ListItemText primary="calories:" />
                     {finalMenuItem.calories}
                     {/*<Typography>  </Typography>*/}
                 </ListItem>
-                <ListItem>
+                <ListItem title="price">
                     <ListItemText primary="price:" />
                     ${finalMenuItem.price.toFixed(2)}
                     {/*<Typography> </Typography>*/}

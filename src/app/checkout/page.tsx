@@ -14,7 +14,7 @@ import { all_locations } from '@/data/menu_location_data';
 import {
     getLocationFromLocalStorage,
     getCartFromLocalStorage
-} from '@/lib/utils';
+} from '@/utils/utils';
 
 
 export default function CheckoutPage() {
@@ -37,16 +37,16 @@ export default function CheckoutPage() {
     let item: keyof Cart;
     let total = 0;
     for (item in cart) {
-        let cart_item = cart[item];
-        if (!cart_item || !cart_item.price) {
+        let cartItem = cart[item];
+        if (!cartItem || !cartItem.price) {
             continue;
         }
-        total += (cart_item.price * cart_item.quantity);
+        total += (cartItem.price * cartItem.quantity);
         cartElement = cartElement.concat(
 
             <ListItem key={item}>
                 <ListItemText primary={item} />
-                {cart_item.quantity} x ${cart_item.price.toFixed(2)}
+                {cartItem.quantity} x ${cartItem.price.toFixed(2)}
             </ListItem>
 
         )

@@ -2,14 +2,13 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
-import Container from '@mui/material/Container';
 import { all_locations } from '@/data/menu_location_data';
 import Header from '@/components/header';
 
 import {
     getCartFromLocalStorage,
     getLocationFromLocalStorage
-} from '@/lib/utils';
+} from '@/utils/utils';
 
 
 /**
@@ -45,8 +44,6 @@ export default function Home() {
         <>
             <Header cart={cart} location={currentLocation} />
             <main>
-                <Container>
-                </Container>
             </main>
         </>
     );

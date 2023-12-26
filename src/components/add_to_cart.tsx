@@ -26,15 +26,15 @@ export function AddToCartButton({
 
     function updateCart() {
         const key = menuItem.name as keyof Cart;
-        let new_cart = { ...cart }; // copy contents of cart
-        if (new_cart[key] != undefined) {
-            new_cart[key].quantity += 1;
+        let newCart = { ...cart }; // copy contents of cart
+        if (newCart[key] != undefined) {
+            newCart[key].quantity += 1;
         }
         else {
-            new_cart[key] = { quantity: 1, price: menuItem.price };
+            newCart[key] = { quantity: 1, price: menuItem.price };
         }
-        onAdd(new_cart);
-        saveCartToLocalStorage(new_cart);
+        onAdd(newCart);
+        saveCartToLocalStorage(newCart);
     }
 
     function saveCartToLocalStorage(newCart: Cart) {
@@ -50,7 +50,6 @@ export function AddToCartButton({
     );
 }
 
-
 /**
  * A Component which displays the total quantity of items in `cart`
  * by taking the sum of all cart[item].quantity values in the cart.
@@ -58,7 +57,7 @@ export function AddToCartButton({
  * @param cart - A `Cart` containing item name, quantity & price
  * @returns - JSX.Element
  */
-export function ShoppingCartItemCounter({ cart }: { cart: Cart }) {
+export function ShoppingCartCounter({ cart }: { cart: Cart }) {
 
     let numItemsInCart = 0; // sum of the quantity keys of all items
     let item: keyof Cart;
@@ -72,7 +71,7 @@ export function ShoppingCartItemCounter({ cart }: { cart: Cart }) {
 
     return (
         <>
-            <Typography>
+            <Typography variant="h4">
                 {numItemsInCart}
             </Typography>
             <ShoppingCartIcon sx={{ ml: 2, mr: 2 }} />
