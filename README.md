@@ -34,7 +34,6 @@ npm run test
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the project.
 
-Your instructions encouraged me to use the tech stack I felt most comfortable with to create this project. I did not head this advice and instead decided to learn Typescript , Next.js and Ract state management in time to finish this project. I am now living with the consequences of that decision and am submitting late. I put a lot of thought into this submisison and I hope that comes through. 
 ### Prompts
 
 #### A paragraph about why you picked the language/framework you did.
