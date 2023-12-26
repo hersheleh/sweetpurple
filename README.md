@@ -5,7 +5,7 @@ This is a basic e-commerce application built to implement three requirements:
 3. Allow the user to reach a checkout page displaying items from the bag and a sub-total.
 
 ### Installing and running the project
-Instructions for running the application on localhost:3000
+Instructions for running the application on [localhost:3000](http://localhost:3000)
 #### Requirements
 Make sure you have [Node.js](https://nodejs.org/en) version 18.17.0 or later installed on you machine. [Nextjs](https://nextjs.org) requires at least this version to run.
 ### Instructions
