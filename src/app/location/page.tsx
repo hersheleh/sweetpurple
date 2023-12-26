@@ -13,16 +13,24 @@ import {
 import { Typography } from '@mui/material';
 import { all_locations } from '@/data/menu_location_data';
 
+/**
+ * Displays a set of location cards which can be clicked ot set location
+ *
+ * @returns - A JSX.Element
+ */
 export default function Location() {
 
     const [cart, setCart] = useState({});
     const [currentLocation, setCurrentLocation] = useState("");
 
     const currentLocationKey = currentLocation as keyof typeof all_locations;
+    // Get the proper name of the location so we can display it in the header
     const currentLocationName = currentLocation ?
         all_locations[currentLocationKey].name : "";
 
     useEffect(() => {
+        // Since we are reading form local storage the state vars
+        // need to be set in useEffect which runs on the client explicitly
         setCart(getCartFromLocalStorage());
         setCurrentLocation(getLocationFromLocalStorage());
     }, []);
@@ -30,6 +38,7 @@ export default function Location() {
     let locationCards: JSX.Element[] = [];
     let key: keyof typeof all_locations;
 
+    // Construct the Location picking page by iterating through all_locations
     for (key in all_locations) {
         const location = all_locations[key];
         const locationName = location.name;
@@ -58,6 +67,14 @@ export default function Location() {
     );
 }
 
+/**
+ * Creates a Location card wich can be clicked to set the apps current location
+ *
+ * @param id The locations unique name e.g los_angeles
+ * @param x.name - The locaitons proper name e.g. Los Angeles, CA
+ * @param x.onUpdate - Function to update the state
+ * @returns - A JSX.Element
+ */
 function LocationCard({ id, name, onUpdate }: {
     id: string,
     name: string,

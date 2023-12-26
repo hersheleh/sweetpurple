@@ -23,10 +23,13 @@ export default function CheckoutPage() {
     const [currentLocation, setCurrentLocation] = useState("");
 
     const currentLocationKey = currentLocation as keyof typeof all_locations;
+    // Get the proper name of the location so we can display it in the header
     const currentLocationName = currentLocation ?
         all_locations[currentLocationKey].name : "";
 
     useEffect(() => {
+        // Since we are reading form local storage the state vars
+        // need to be set in useEffect which runs on the client explicitly
         const locationLocalStorage = getLocationFromLocalStorage();
         setCurrentLocation(locationLocalStorage);
         setCart(getCartFromLocalStorage());
@@ -36,6 +39,10 @@ export default function CheckoutPage() {
 
     let item: keyof Cart;
     let total = 0;
+    // Iterate through all the items from the cart variable
+    // calculate the total price  by multiplying the price and quantity
+    // and add the results to the total price.
+    // Construct a list item for each item with price and quantity
     for (item in cart) {
         let cartItem = cart[item];
         if (!cartItem || !cartItem.price) {
@@ -51,6 +58,7 @@ export default function CheckoutPage() {
 
         )
     }
+    // Add the total price as the last element
     cartElement = cartElement.concat(
         <>
             <Divider variant="middle" />

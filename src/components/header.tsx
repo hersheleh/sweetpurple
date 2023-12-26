@@ -10,16 +10,18 @@ import LocationOn from '@mui/icons-material/LocationOn';
 import { ShoppingCartCounter } from '@/components/add_to_cart';
 import { Cart } from '@/app/MenuTypes';
 
-// const theme = createTheme({
-//     palette: {
-//         primary: purple
-//     },
-//     typography: {
-//         fontFamily: kalnia.style.fontFamily
-//     }
-// });
 
 
+/**
+ * Displays the header which shows the logo, the current location
+ * and the cart counter. Logo can be clicked to go to the menu page.
+ * Only displays the location widget if current_location is set in
+ * in localStorage
+ *
+ * @param cart - the shopping cart data
+ * @param location - the current location
+ * @returns - A JSX.Element
+ */
 export default function Header({ cart, location }: {
     cart: Cart,
     location: string

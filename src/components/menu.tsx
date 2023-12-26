@@ -91,6 +91,14 @@ export function MenuSection({ menuSection, cart, onAdd }: {
     );
 }
 
+/**
+ * A Component which displays a menu item card.
+ *
+ * @param menuItem - A MenuItemProp
+ * @param cart - The current cart
+ * @param onAdd - Function to set the state variable
+ * @returns - A JSX.Element
+ */
 export function MenuItemCard({ menuItem, cart, onAdd }: {
     menuItem: MenuItemProps,
     cart: Cart,
@@ -99,8 +107,11 @@ export function MenuItemCard({ menuItem, cart, onAdd }: {
 
     const menuItemName = menuItem.name as keyof typeof allFoodItems;
     let defaultMenuItem = allFoodItems[menuItemName];
-
     let finalMenuItem = { ...menuItem }; // make a copy of menuItem
+
+    // Construct a menuItem card.
+    // If the current menu item includes a price use it,
+    // otherwise use the price from all_produce.json
     finalMenuItem.description = defaultMenuItem.description;
     finalMenuItem.calories = defaultMenuItem.calories;
     finalMenuItem.price = defaultMenuItem.price;
