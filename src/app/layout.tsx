@@ -2,7 +2,7 @@
 
 // import type { Metadata } from 'next'
 import './globals.css'
-import { kalnia, roboto, noto_serif } from './fonts'
+import { noto_serif } from '@/app/fonts'
 import { purple } from "@mui/material/colors";
 import createTheme from "@mui/material/styles/createTheme";
 import ThemeProvider from '@mui/material/styles/ThemeProvider';

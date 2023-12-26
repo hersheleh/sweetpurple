@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { all_locations } from '@/data/menu_location_data';
 import Header from '@/components/header';

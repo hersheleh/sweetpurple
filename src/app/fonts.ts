@@ -3,14 +3,14 @@ import localFont from 'next/font/local';
 
 
 export const kalnia = localFont({
-  src: '/font/Kalnia-VariableFont_wdth,wght.ttf',
-  display: 'swap'
+    src: '/fonts/Kalnia-VariableFont_wdth,wght.ttf',
+    display: 'swap'
 })
 
 export const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap'
+    weight: '400',
+    subsets: ['latin'],
+    display: 'swap'
 })
 
 export const noto_serif = Noto_Serif({

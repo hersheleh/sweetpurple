@@ -56,7 +56,7 @@ export default function CheckoutPage() {
             <Divider variant="middle" />
             <ListItem>
                 <ListItemText primary="total" />
-                <Typography> ${total.toFixed(2)} </Typography>
+                <Typography title="total">${total.toFixed(2)}</Typography>
             </ListItem>
         </>
     );
@@ -73,8 +73,6 @@ export default function CheckoutPage() {
                         <List>
                             {cartElement}
                         </List>
-
-
                     </Paper>
                 </Container>
             </main>
