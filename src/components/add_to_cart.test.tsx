@@ -1,15 +1,13 @@
-import { Cart, MenuItemProps } from '@/app/MenuTypes';
-import Header from '@/components/header';
+import type { Cart, MenuItemProps } from '@/app/MenuTypes';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { useState as useStateMock } from 'react';
-import { afterEach, afterAll, expect, test, vi, describe } from 'vitest';
-import { AddToCartButton } from './add_to_cart';
+import { afterEach, expect, test, describe } from 'vitest';
+import { AddToCartButton, ShoppingCartCounter } from '@/components/add_to_cart';
 
 
-describe("TestAddToCart", () => {
+describe("Test AddToCartButton", () => {
     afterEach(cleanup);
 
-    test('add new item', () => {
+    test('adds new item to cart', () => {
 
         const menuItem: MenuItemProps = {
             name: "item",
@@ -44,7 +42,7 @@ describe("TestAddToCart", () => {
         );
     });
 
-    test('add existing item', () => {
+    test('adds existing item to cart', () => {
 
         const menuItem: MenuItemProps = {
             name: "item",
@@ -85,3 +83,29 @@ describe("TestAddToCart", () => {
 
 });
 
+
+describe ("Test ShoppingCartCounter", () => {
+    afterEach(cleanup);
+
+    test("shows correct count", () => {
+        // initialize the mock cart object
+        let mockCart: Cart = {};
+        mockCart["item1" as keyof Cart] = {quantity: 2, price: 2.50}
+        mockCart["item2" as keyof Cart] = {quantity: 3, price: 0.50}
+
+        render(
+            <ShoppingCartCounter cart={mockCart}/>
+        );
+        const cartTotalQuantity = "5";
+
+        const shoppingCartCounter = screen.getByRole(
+            'heading',
+            { level: 4, name: cartTotalQuantity });
+
+        expect(
+            shoppingCartCounter.textContent
+        ).toEqual(
+            cartTotalQuantity
+        );
+    });
+});

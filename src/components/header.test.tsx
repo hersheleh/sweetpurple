@@ -33,12 +33,12 @@ vi.mock("next/font/local", () => ({
 
 test('Test that Header displays the current location', () => {
 
-    let test_location = 'test_los_angeles'
-    let test_cart: Cart = {};
-    test_cart['product1' as keyof Cart] = { quantity: 3, price: 5.00 };
-    test_cart['product2' as keyof Cart] = { quantity: 1, price: 2.20 };
-    render(<Header cart={test_cart} location={test_location} />);
+    let testLocation = 'test_los_angeles'
+    let testCart: Cart = {};
+    testCart['product1' as keyof Cart] = { quantity: 3, price: 5.00 };
+    testCart['product2' as keyof Cart] = { quantity: 1, price: 2.20 };
+    render(<Header cart={testCart} location={testLocation} />);
 
     expect(screen.getByRole('heading', { name: "sweetpurple" })).toBeDefined();
-    expect(screen.getByRole('link', { name: test_location })).toBeDefined();
+    expect(screen.getByRole('link', { name: testLocation })).toBeDefined();
 });
