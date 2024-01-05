@@ -22,6 +22,7 @@ export interface MenuSectionProps {
 
 export interface MenuItemProps {
     name: string,
+    ingredients: Array<string>;
     price?: number,
     description?: string;
     calories?: number;

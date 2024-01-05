@@ -11,10 +11,6 @@ import {
 } from '@/utils/utils';
 
 
-/**
- * The HomePage
- *
- */
 export default function Home() {
 
     const [cart, setCart] = useState({});

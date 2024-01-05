@@ -92,7 +92,7 @@ export function MenuSection({ menuSection, cart, onAdd }: {
 }
 
 /**
- * A Component which displays a menu item card.
+ * This function displays a single menu item from the menu json
  *
  * @param menuItem - A MenuItemProp
  * @param cart - The current cart
@@ -104,17 +104,38 @@ export function MenuItemCard({ menuItem, cart, onAdd }: {
     cart: Cart,
     onAdd: Dispatch<SetStateAction<Cart>>
 }) {
-
+    // Get menuItemName from
     const menuItemName = menuItem.name as keyof typeof allFoodItems;
-    let defaultMenuItem = allFoodItems[menuItemName];
+    // let defaultMenuItem = allFoodItems[menuItemName];
+
+    // Initialize the finalMenuItem from this locations json menuItem
     let finalMenuItem = { ...menuItem }; // make a copy of menuItem
+
+    let total_calories = 0; // initialize the total calorie calculation
+
+    // Calculate the total calories for this menu Item, by iterating through the ingredients
+    // inside this locations menu json.
+    // Then add each calorie from master produce json to this menu items calorie field
+    let ingredient: string;
+    for (ingredient in finalMenuItem.ingredients) {
+        const ingredient_name = finalMenuItem.ingredients[ingredient];
+        const ingredient_item = allFoodItems[ingredient_name as keyof typeof allFoodItems];
+        total_calories += ingredient_item.calories;
+    }
+
+    // Create ListItems for each ingredient name
+    const ingredient_names = finalMenuItem.ingredients.map(ingredient_name =>
+        <ListItem>{ ingredient_name }</ListItem>
+    )
 
     // Construct a menuItem card.
     // If the current menu item includes a price use it,
     // otherwise use the price from all_produce.json
-    finalMenuItem.description = defaultMenuItem.description;
-    finalMenuItem.calories = defaultMenuItem.calories;
-    finalMenuItem.price = defaultMenuItem.price;
+    // finalMenuItem.description = defaultMenuItem.description;
+    // finalMenuItem.calories = defaultMenuItem.calories;
+    // finalMenuItem.price = defaultMenuItem.price;
+
+    finalMenuItem.calories
 
     if (menuItem.price) {
         finalMenuItem.price = menuItem.price;
@@ -127,19 +148,21 @@ export function MenuItemCard({ menuItem, cart, onAdd }: {
             </Typography>
             <Divider />
             <Typography title="description" variant="body1">
-                {finalMenuItem.description}
+                {/*finalMenuItem.description*/}
             </Typography>
             <List>
                 <ListItem title="calories">
                     <ListItemText primary="calories:" />
-                    {finalMenuItem.calories}
+                    {total_calories}
                     {/*<Typography>  </Typography>*/}
                 </ListItem>
-                <ListItem title="price">
-                    <ListItemText primary="price:" />
-                    ${finalMenuItem.price.toFixed(2)}
-                    {/*<Typography> </Typography>*/}
-                </ListItem>
+                {ingredient_names}
+                {/* <ListItem title="price"> */}
+                {/*     <ListItemText primary="name:" /> */}
+                {/*     {ingredient_names} */}
+                {/*     ${\/*finalMenuItem.price.toFixed(2)*\/} */}
+                {/*     {\/*<Typography> </Typography>*\/} */}
+                {/* </ListItem> */}
             </List>
             <AddToCartButton
                 menuItem={finalMenuItem}
